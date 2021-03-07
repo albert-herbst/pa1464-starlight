@@ -1,0 +1,6 @@
+{
+    "board": "arduino:avr:mega",
+    "configuration": "cpu=atmega2560",
+    "sketch": "FastLED-3.4.0\\examples\\Blink\\Blink.ino",
+    "port": "COM6"
+}
