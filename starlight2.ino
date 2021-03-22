@@ -2,6 +2,7 @@
 
 #include <FastLED.h>
 #include "Mux.h"
+#include <vector>
 
 // How many leds in your strip?
 #define NUM_LEDS 5
@@ -24,33 +25,78 @@
 
 // Define the array of leds
 CRGB leds[NUM_LEDS];
-int signof;
+
 
 //using namespace admux;
 
 
+/*
+PSEUDOKOD
+
+    enum STATE { IDLE, CONFERENCE, VISITOR };
+    int updateFreq;
+*/
+
+/*
+  * Creates a Mux instance.
+  *
+  * 1st argument is the SIG (signal) pin (Arduino digital input pin 3).
+  * 2nd argument is the S0-S3 (channel control) pins (Arduino pins 8, 9, 10, 11).
+*/
+
+std::vector<admux::Mux> muxlist;
+
 admux::Mux mux(admux::Pin(MUX_SIG_PIN, INPUT, admux::PinType::Digital), admux::Pinset(S0, S1, S2, S3));
 void setup() { 
-  signof = 0;  
+    
     // Uncomment/edit one of the following lines for your leds arrangement.
     // ## Clockless types ##
     //Serial.begin(9600);
     //Serial.print("Program start");
     FastLED.addLeds<NEOPIXEL, LED_PIN>(leds, NUM_LEDS);  // GRB ordering is assumed   
 
-  /*
-  * Creates a Mux instance.
-  *
-  * 1st argument is the SIG (signal) pin (Arduino digital input pin 3).
-  * 2nd argument is the S0-S3 (channel control) pins (Arduino pins 8, 9, 10, 11).
-  */
+  
   
 }
 
-void loop() { 
+void loop(){
+
+
+
+    /*
+
+    //Read Input from MUX
+    För varje knapp i Mux:
+
+
+    
+
+
+
+
+
+
+
+
+    Om STATE == IDLE
+        Kolla om någon interaction skett
+            Om Conf_Switch är av:
+                Sätt STATE = VISITOR
+            Om Conf_Switch är på:
+                Sätt STATE = CONFERENCE
+        Annars:
+            Gör ingenting / Idle animationer?
+
+    Om STATE == VISITOR ELLER CONFERENCE
+    
+    delay(updateFreq);
+    */
+
+
+  /* CHECKS MUX  
   byte data;
   for (byte i = 0; i < 5; i++) {
-    data = mux.read(i) /* Reads from channel i (returns HIGH or LOW) */;
+    data = mux.read(i); //Reads from channel i (returns HIGH or LOW)
     if(data == HIGH) leds[i].setRGB(150, 150, 150);
     else leds[i].setRGB(0, 0, 0);
     
@@ -59,9 +105,8 @@ void loop() {
   //Serial.println();
   FastLED.show();
   delay(16);
-  
-
   /*
+
   for (int j = 0; j < 255; j++)
       {
       for (int i = 0; i < NUM_LEDS; i++)
