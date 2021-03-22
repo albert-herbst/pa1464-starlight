@@ -2,6 +2,5 @@
     "board": "arduino:avr:mega",
     "configuration": "cpu=atmega2560",
     "sketch": "starlight.ino",
-    
     "port": "COM6"
 }
