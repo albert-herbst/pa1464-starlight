@@ -1,25 +1,25 @@
 #include <Arduino.h>
-
 #include <FastLED.h>
 #include "Mux.h"
-#include <vector>
+#include "MuxManager.h"
+#include <math.h>
 
-// How many leds in your strip?
+// How many leds are there in your strip?
 #define NUM_LEDS 5
 
 // For led chips like WS2812, which have a data line, ground, and power, you just
 // need to define DATA_PIN.  For led chipsets that are SPI based (four wires - data, clock,
 // ground, and power), like the LPD8806 define both DATA_PIN and CLOCK_PIN
 // Clock pin only needed for SPI based chipsets when not using hardware SPI
-#define LED_PIN 23
+#define LED_PIN 30
 #define INPUT_PIN 41
 #define CLOCK_PIN 13
-#define MUX_SIG_PIN 53
+//#define MUX_SIG_PIN 53
 #define S0 51
 #define S1 50
 #define S2 49
 #define S3 48
-#include <math.h>
+
 
 //using namespace admux;
 
@@ -44,9 +44,11 @@ PSEUDOKOD
   * 2nd argument is the S0-S3 (channel control) pins (Arduino pins 8, 9, 10, 11).
 */
 
-std::vector<admux::Mux> muxlist;
 
-admux::Mux mux(admux::Pin(MUX_SIG_PIN, INPUT, admux::PinType::Digital), admux::Pinset(S0, S1, S2, S3));
+
+
+MuxManager Mux_Manager(5);
+
 void setup() { 
     
     // Uncomment/edit one of the following lines for your leds arrangement.
@@ -59,9 +61,26 @@ void setup() {
   
 }
 
+
+
 void loop(){
 
-
+  	for (unsigned i = 0; i < MUX_AMOUNT; i++)
+    {
+      // CHECKS MUX  
+      byte data;
+      for (byte j = 0; j < Mux_Manager.amountOfButtons; j++) {
+        data = Mux_Manager.muxArr[i].read(j); //Reads from channel i (returns HIGH or LOW)
+        if(data == HIGH) leds[j].setRGB(150, 150, 150);
+        else leds[j].setRGB(0, 0, 0);
+        
+        //Serial.print("Push button at channel "); Serial.print(i); Serial.print(" is "); Serial.println(data == LOW ? "not pressed" : "pressed");
+      }
+      //Serial.println();
+      FastLED.show();
+      delay(16);    
+    }
+    
 
     /*
 
