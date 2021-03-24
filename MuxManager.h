@@ -20,11 +20,12 @@ private:
 
     //Member Functions
 
-    void AddMuxes();
+    
 
 public:
     unsigned amountOfButtons;
-    MuxManager(unsigned amountOfButtons);
+    MuxManager(unsigned amountOfButtons = 0);
     ~MuxManager();
-    admux::Mux muxArr[MUX_AMOUNT];
+    admux::Mux* muxArr[MUX_AMOUNT];
+    void AddMuxes();
 };

@@ -47,38 +47,42 @@ PSEUDOKOD
 
 
 
-MuxManager Mux_Manager(5);
+MuxManager Mux_Manager;
 
 void setup() { 
-    
-    // Uncomment/edit one of the following lines for your leds arrangement.
-    // ## Clockless types ##
-    //Serial.begin(9600);
-    //Serial.print("Program start");
-    FastLED.addLeds<NEOPIXEL, LED_PIN>(leds, NUM_LEDS);  // GRB ordering is assumed   
-
   
+  // Uncomment/edit one of the following lines for your leds arrangement.
+  // ## Clockless types ##
+  Serial.begin(9600);
+  Serial.println("Program start");
+  FastLED.addLeds<NEOPIXEL, LED_PIN>(leds, NUM_LEDS);  // GRB ordering is assumed   
+  
+  Mux_Manager.amountOfButtons = 5;
+  Mux_Manager.AddMuxes();
   
 }
 
 
-
+//BUG: For some reason leds pair up every second button
 void loop(){
-
+    
   	for (unsigned i = 0; i < MUX_AMOUNT; i++)
     {
       // CHECKS MUX  
-      byte data;
+      int16_t data;
+      Serial.println("Mux_Manager.amountOfButtons: ");
+      Serial.print(Mux_Manager.amountOfButtons);
+      delay(500);
       for (byte j = 0; j < Mux_Manager.amountOfButtons; j++) {
-        data = Mux_Manager.muxArr[i].read(j); //Reads from channel i (returns HIGH or LOW)
-        if(data == HIGH) leds[j].setRGB(150, 150, 150);
+        data = Mux_Manager.muxArr[i]->read(j); //Reads from channel j (returns HIGH or LOW)
+        if(data == HIGH) leds[j].setRGB(100, 100, 100);
         else leds[j].setRGB(0, 0, 0);
         
-        //Serial.print("Push button at channel "); Serial.print(i); Serial.print(" is "); Serial.println(data == LOW ? "not pressed" : "pressed");
+        Serial.print("Push button at channel "); Serial.print(j); Serial.print(" is "); Serial.println(data == HIGH ? "is HIGH" : "is LOW");
       }
-      //Serial.println();
+      Serial.println();
       FastLED.show();
-      delay(16);    
+      //delay(16);    
     }
     
 

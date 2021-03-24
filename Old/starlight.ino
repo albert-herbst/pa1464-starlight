@@ -10,14 +10,14 @@
 // need to define DATA_PIN.  For led chipsets that are SPI based (four wires - data, clock,
 // ground, and power), like the LPD8806 define both DATA_PIN and CLOCK_PIN
 // Clock pin only needed for SPI based chipsets when not using hardware SPI
-#define LED_PIN 23
+#define LED_PIN 30
 #define INPUT_PIN 41
 #define CLOCK_PIN 13
-#define MUX_SIG_PIN 53
-#define S0 51
-#define S1 50
-#define S2 49
-#define S3 48
+#define MUX_SIG_PIN 22
+#define S0 23
+#define S1 24
+#define S2 25
+#define S3 26
 #include <math.h>
 
 //using namespace admux;
@@ -34,8 +34,8 @@ void setup() {
   signof = 0;  
     // Uncomment/edit one of the following lines for your leds arrangement.
     // ## Clockless types ##
-    //Serial.begin(9600);
-    //Serial.print("Program start");
+    Serial.begin(9600);
+    Serial.print("Program start, starlight.ino");
     FastLED.addLeds<NEOPIXEL, LED_PIN>(leds, NUM_LEDS);  // GRB ordering is assumed   
 
   /*
@@ -54,9 +54,9 @@ void loop() {
     if(data == HIGH) leds[i].setRGB(150, 150, 150);
     else leds[i].setRGB(0, 0, 0);
     
-    //Serial.print("Push button at channel "); Serial.print(i); Serial.print(" is "); Serial.println(data == LOW ? "not pressed" : "pressed");
+    Serial.print("Push button at channel "); Serial.print(i); Serial.print(" is "); Serial.println(data == LOW ? "not pressed" : "pressed");
   }
-  //Serial.println();
+  Serial.println();
   FastLED.show();
   delay(16);
   
