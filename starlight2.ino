@@ -3,6 +3,7 @@
 #include "Mux.h"
 #include "MuxManager.h"
 #include <math.h>
+#include "Definitions.h"
 
 // How many leds are there in your strip?
 #define NUM_LEDS 5
@@ -19,6 +20,7 @@
 #define S1 50
 #define S2 49
 #define S3 48
+
 
 
 //using namespace admux;
@@ -43,9 +45,7 @@ PSEUDOKOD
   * 1st argument is the SIG (signal) pin (Arduino digital input pin 3).
   * 2nd argument is the S0-S3 (channel control) pins (Arduino pins 8, 9, 10, 11).
 */
-
-
-
+IOArray interface;
 
 MuxManager Mux_Manager;
 
@@ -58,6 +58,7 @@ void setup() {
   FastLED.addLeds<NEOPIXEL, LED_PIN>(leds, NUM_LEDS);  // GRB ordering is assumed   
   
   Mux_Manager.amountOfButtons = 5;
+  
   Mux_Manager.AddMuxes();
   
 }
@@ -90,16 +91,6 @@ void loop(){
 
     //Read Input from MUX
     För varje knapp i Mux:
-
-
-    
-
-
-
-
-
-
-
 
     Om STATE == IDLE
         Kolla om någon interaction skett

@@ -1,6 +1,6 @@
 #pragma once
 #include "Mux.h"
-
+#include "Definitions.h"
 
 #define START_PIN 22
 /*
@@ -10,7 +10,7 @@
 #define MUX_AMOUNT 4
 */
 //Testning
-#define MUX_AMOUNT 1
+
 
 class MuxManager
 {
