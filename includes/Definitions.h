@@ -1,7 +1,7 @@
 #pragma once
 
 #define MUX_AMOUNT 1
-#define BUTTON_AMOUNT 16
+#define BUTTON_AMOUNT 5
 
 
 typedef struct{

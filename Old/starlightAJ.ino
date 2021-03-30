@@ -46,6 +46,8 @@ void loop(){
         } 
     }
 
+    
+
     //Check if in IDLE state
     if(timeManager.isIdle()){
         //Placeholder, simply light all 'constellations' for now
@@ -57,6 +59,7 @@ void loop(){
     }
     //Check if in ACTIVE state
     else if(inputDetected == true){
+        // old_interfaceArray.data = interfaceArray.data;
         ledManager.setLeds(&interfaceArray);
     }
     

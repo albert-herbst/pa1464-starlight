@@ -30,6 +30,7 @@ int signof;
 
 
 admux::Mux mux(admux::Pin(MUX_SIG_PIN, INPUT, admux::PinType::Digital), admux::Pinset(S0, S1, S2, S3));
+admux::Mux* muxptr = &mux;
 void setup() { 
   signof = 0;  
     // Uncomment/edit one of the following lines for your leds arrangement.
@@ -50,7 +51,7 @@ void setup() {
 void loop() { 
   byte data;
   for (byte i = 0; i < 5; i++) {
-    data = mux.read(i) /* Reads from channel i (returns HIGH or LOW) */;
+    data = (*muxptr).read(i) /* Reads from channel i (returns HIGH or LOW) */;
     if(data == HIGH) leds[i].setRGB(150, 150, 150);
     else leds[i].setRGB(0, 0, 0);
     
