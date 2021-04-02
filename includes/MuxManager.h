@@ -1,5 +1,5 @@
 #pragma once
-#include "Mux.h"
+#include "..\lib\arduino-ad-mux-lib-master\src\Mux.h"
 #include "Definitions.h"
 
 #define START_PIN 22

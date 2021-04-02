@@ -40,19 +40,19 @@ enum class PinType {
   Digital
 };
 
-typedef struct Pin {
+typedef struct MuxPin {
   int8_t pin;
   uint8_t mode;
   PinType type;
 
-  Pin() :
-      Pin(UNDEFINED, OUTPUT, PinType::Digital) {
+  MuxPin() :
+      MuxPin(UNDEFINED, OUTPUT, PinType::Digital) {
   }
 
-  Pin(int8_t pin, uint8_t mode, PinType type) :
+  MuxPin(int8_t pin, uint8_t mode, PinType type) :
       pin(pin), mode(mode), type(type) {
   }
-} Pin;
+} MuxPin;
 
 typedef struct Pinset {
 // @formatter:off
@@ -139,7 +139,7 @@ public:
    * @param enablePin
    *      MCU pin to which the mux enable pin (EN) connects.
    */
-  Mux(Pin signalPin, Pinset channelPins, int8_t enablePin = UNDEFINED);
+  Mux(MuxPin signalPin, Pinset channelPins, int8_t enablePin = UNDEFINED);
 
   /**
    * Current channel.
@@ -201,7 +201,7 @@ public:
    */
   int16_t read(int8_t channel = UNDEFINED);
 
-  Pin signalPin() {
+  MuxPin signalPin() {
     return m_signalPin;
   }
 
@@ -212,7 +212,7 @@ public:
    *
    * @return ERROR_SUCCESS, if success.
    */
-  int8_t signalPin(Pin value);
+  int8_t signalPin(MuxPin value);
 
   /**
    * As the same mux can be physically connected to multiple (mutually-
@@ -228,7 +228,7 @@ public:
    * @return ERROR_SUCCESS, if success.
    */
   int8_t signalPin(int8_t pin, uint8_t mode, PinType type) {
-    return signalPin(Pin(pin, mode, type));
+    return signalPin(MuxPin(pin, mode, type));
   }
 
   /**
@@ -260,7 +260,7 @@ protected:
   Pinset m_channelPins;
   bool m_enabled = true;
   int8_t m_enablePin = UNDEFINED;
-  Pin m_signalPin;
+  MuxPin m_signalPin;
 };
 
 }
