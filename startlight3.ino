@@ -1,72 +1,76 @@
-#include <Arduino.h>
-#include "includes/Definitions.h"
-#include "includes/ButtonManager.h"
-#include "includes/LedManager.h"
-#include "includes/TimeManager.h"
 
+#include "includes\Definitions.h"
+#include "includes\LedManager.h"
+#include "includes\TimeManager.h"
+#include "includes\ButtonManager.h"
 
-
-/*
-PSEUDOKOD
-
-    enum STATE { IDLE, CONFERENCE, VISITOR };
-    int updateFreq;
-*/
 
 IOArray interfaceArray;
 IOArray old_interfaceArray;
 ButtonManager buttonManager;
-//LedManager ledManager();
 TimeManager timeManager;
 
-void setup() { 
+LedManager ledManager;
+
+void setup()
+{
     Serial.begin(9600);
     Serial.println("Program start");
+    
+    
     buttonManager = ButtonManager();
     buttonManager.initMuxes();
     timeManager = TimeManager();
     timeManager.setTime();
-    buttonManager.GetButtons(&interfaceArray);
+
+    ledManager = LedManager();
+    ledManager.Setup();
+
     for (unsigned i = 0; i < BUTTON_AMOUNT; i++)
     {
         old_interfaceArray.data[i] = interfaceArray.data[i];
-    }    
-  
+    }
+    
 }
 
-void loop(){
+bool isAlreadyIdle = false;
+
+void loop()
+{
+    
     //Read input every loop update
     buttonManager.GetButtons(&interfaceArray);
 
     //Check if there is any change in the input, a change means one or more buttons have been pressed
     bool inputDetected = false;
+    bool pressed = false;
     for (unsigned i = 0; i < BUTTON_AMOUNT; i++)
     {
+        if (interfaceArray.data[i] == true)
+        {
+            inputDetected = true;
+        }
         if (old_interfaceArray.data[i] != interfaceArray.data[i]){
             inputDetected = true;
             //Set last interaction
             timeManager.setTime();
         } 
     }
-
     
-
-    //Check if in IDLE state
-    if(timeManager.isIdle()){
-        Serial.println("I am idle Pog");
+    if(timeManager.isIdle() && !isAlreadyIdle && !inputDetected){
         //Placeholder, simply light all 'constellations' for now
-        for (unsigned i = 0; i < BUTTON_AMOUNT; i++)
-        {
-            //interfaceArray.data[i] = true;
-        }
-
+        //Serial.println("Setting idle");
+        ledManager.IdleLeds();
+        ledManager.LedShow();
+        isAlreadyIdle = true;
     }
     //Check if in ACTIVE state
-    else if(inputDetected == true){
-        // old_interfaceArray.data = interfaceArray.data;
-        Serial.println("Setting leds lol");
-        //ledManager.setLeds(&interfaceArray);
-        
+    else if(inputDetected == true)
+    {
+        //Serial.println("Setting leds");
+        ledManager.SetLeds(&interfaceArray);
+        ledManager.LedShow();
+        isAlreadyIdle = false;
     }
 
     //Update the old array
@@ -74,7 +78,5 @@ void loop(){
     {
         old_interfaceArray.data[i] = interfaceArray.data[i];
     }
-    
-    //Kolla efter hemliga koder
     
 }

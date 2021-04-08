@@ -5,7 +5,7 @@ class TimeManager
 {
     private:
     unsigned long latestInteraction;
-    unsigned long idleTimeout;
+    unsigned long idleTimeout = 2000;
 
     unsigned long getTime();
 

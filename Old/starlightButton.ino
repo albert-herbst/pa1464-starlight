@@ -14,8 +14,8 @@ IOArray interface;
 
 void setup()
 {
-    Serial.begin(9600);
-    Serial.println("Program start");
+    //Serial.begin(9600);
+    //Serial.println("Program start");
     buttonManager = ButtonManager();
     buttonManager.initMuxes();
     FastLED.addLeds<NEOPIXEL, LED_PIN>(leds, NUM_LEDS);
@@ -31,17 +31,17 @@ void loop()
     {
         if (interface.data[i])
         {
-            Serial.print("LED ON: ");
-            Serial.println(i);
-            leds[i].setRGB(255,255,255);
+            //Serial.print("LED ON: ");
+            //Serial.println(i);
+            leds[i].setRGB(0,255,0);
         }
         else
         {
-            Serial.print("LED OFF");
-            Serial.println(i);
+            //Serial.print("LED OFF");
+            //Serial.println(i);
             leds[i].setRGB(0,0,0);
         }
     }
     FastLED.show();
-    delay(1000);
+    //delay(1000);
 }

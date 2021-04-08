@@ -4,6 +4,7 @@
 #define BUTTON_AMOUNT 5
 
 
+
 typedef struct{
   bool data[BUTTON_AMOUNT];
 } IOArray;
