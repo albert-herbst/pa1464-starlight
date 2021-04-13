@@ -61,7 +61,7 @@ void loop()
         //Placeholder, simply light all 'constellations' for now
         //Serial.println("Setting idle");
         ledManager.IdleLeds();
-        ledManager.LedShow();
+        
         isAlreadyIdle = true;
     }
     //Check if in ACTIVE state
@@ -69,7 +69,7 @@ void loop()
     {
         //Serial.println("Setting leds");
         ledManager.SetLeds(&interfaceArray);
-        ledManager.LedShow();
+        
         isAlreadyIdle = false;
     }
 
@@ -78,5 +78,6 @@ void loop()
     {
         old_interfaceArray.data[i] = interfaceArray.data[i];
     }
-    
+    ledManager.LedShow();
+    delay(30);
 }

@@ -28,10 +28,17 @@ void LedManager::Setup()
     setupConstellation(1, 1, 1, 200, 0, 0);
 
     setupConstellation(2, 2, 4, 0, 0, 200);
+
+    idleValue[0] = 0;
+    idleValue[1] = 150;
+    idleValue[2] = 200;
+    idleValue[3] = 50;
+    idleValue[4] = 100;
 }
 
 void LedManager::SetLeds(IOArray* io_array)
 {
+    isIdle = false;
     for (int i = 0; i < BUTTON_AMOUNT; i++)
     {
         //Serial.print("Setting group: ");
@@ -71,14 +78,51 @@ void LedManager::updateGroup(int group, bool on)
 void LedManager::LedShow()
 {
     //Serial.println("Showing leds");
+    if (isIdle)
+    {
+        IdleLeds();
+    }
     FastLED.show();
 }
 
 void LedManager::IdleLeds()
 {
+    isIdle = true;
     for (int i; i < NUM_LEDS; i++)
     {
         Serial.println(i, DEC);
-        leds[i].setRGB(10, 40, 60);
+        idleValue[i] = incrementIdle(idleValue[i], 1);
+        CHSV color = mapColors(idleWave(idleValue[i]));
+        leds[i].setHSV(color.h, color.s, color.v);
     }
+}
+
+int LedManager::timeStep()
+{
+
+}
+
+byte LedManager::incrementIdle(int value, byte increment)
+{
+    value = value + increment;
+    if (value > 254)
+    {
+        return value - 255;
+    }
+    else
+    {
+        return value;
+    }
+}
+
+CHSV LedManager::mapColors(unsigned int value)
+{
+    byte h = map(value, 0, 255, 150, 230);
+    //byte h = map(value, 0, 255, 0, 255);
+    return CHSV(h, 255, 100);
+}
+
+unsigned int LedManager::idleWave(byte value)
+{
+    return quadwave8(value);
 }
