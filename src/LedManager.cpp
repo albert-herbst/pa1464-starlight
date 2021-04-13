@@ -117,7 +117,7 @@ byte LedManager::incrementIdle(int value, byte increment)
 
 CHSV LedManager::mapColors(unsigned int value)
 {
-    byte h = map(value, 0, 255, 150, 230);
+    byte h = map(value, 0, 255, 0, 250);
     //byte h = map(value, 0, 255, 0, 255);
     return CHSV(h, 255, 100);
 }
