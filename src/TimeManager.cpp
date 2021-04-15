@@ -24,6 +24,7 @@ void TimeManager::setTime()
 
 bool TimeManager::isIdle()
 {
+    //Requires a restart after 50-days of constant uptime.
     // TODO(Simon): Might want overflow protection
     if (millis() > (this->latestInteraction + this->idleTimeout))
     {
