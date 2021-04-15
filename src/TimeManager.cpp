@@ -34,3 +34,4 @@ bool TimeManager::isIdle()
         return false;
     }
 }
+
