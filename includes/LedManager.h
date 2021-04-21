@@ -5,7 +5,7 @@
 
 #define LED_PIN 30
 #define NUM_LEDS 5
-#define NUM_CONSTELLATIONS 3
+#define NUM_CONSTELLATIONS 4
 #define ANIMATION_SPEED 0 // Cycles per second
 
 

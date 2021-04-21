@@ -27,7 +27,9 @@ void LedManager::Setup()
 
     setupConstellation(1, 1, 1, 200, 0, 0);
 
-    setupConstellation(2, 2, 4, 0, 0, 200);
+    setupConstellation(2, 2, 3, 0, 0, 200);
+
+    setupConstellation(3, 4, 4, 200, 200, 200);
 
     idleValue[0] = 0;
     idleValue[1] = 150;
