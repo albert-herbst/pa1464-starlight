@@ -31,7 +31,7 @@ Idag är Starlight i ett konceptstadie. Men vi har redan skapat ett demo med tre
 <p align="center">
   <img src="https://i.imgur.com/1OHlyMU.png">
 </p>
-<center>Så här ser demot ut!</center>
+<p align="center">Så här ser demot ut!</p>
 
 
 ## Krav
@@ -71,7 +71,7 @@ Starlight is only a proof of concept today. But we have created a demo that has 
 <p align="center">
   <img src="https://i.imgur.com/1OHlyMU.png">
 </p>
-<center>This is the demo!</center>
+<p align="center">This is the demo!</p>
 
 ## Requirements
 1. Arduino IDE
