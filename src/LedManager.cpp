@@ -23,19 +23,29 @@ void LedManager::Setup()
     IdleLeds();
     LedShow();
     
-    setupConstellation(0, 0, 0, 0, 200, 0);
+    setupConstellation(0, 0, 4, 0, 125, 0);
 
-    setupConstellation(1, 1, 1, 200, 0, 0);
+    setupConstellation(1, 5, 6, 125, 0, 0);
 
-    setupConstellation(2, 2, 3, 0, 0, 200);
+    setupConstellation(2, 7, 13, 0, 0, 125);
 
-    setupConstellation(3, 4, 4, 200, 200, 200);
 
     idleValue[0] = 0;
-    idleValue[1] = 150;
-    idleValue[2] = 200;
-    idleValue[3] = 50;
-    idleValue[4] = 100;
+    idleValue[1] = 14;
+    idleValue[2] = 28;
+    idleValue[3] = 42;
+    idleValue[4] = 56;
+
+    idleValue[5] = 70;
+    idleValue[6] = 84;
+    idleValue[7] = 98;
+    idleValue[8] = 112;
+    idleValue[9] = 126;
+
+    idleValue[10] = 140;
+    idleValue[11] = 154;
+    idleValue[12] = 168;
+    idleValue[13] = 182;
 }
 
 void LedManager::SetLeds(IOArray* io_array)
@@ -121,7 +131,7 @@ CHSV LedManager::mapColors(unsigned int value)
 {
     byte h = map(value, 0, 255, 0, 250);
     //byte h = map(value, 0, 255, 0, 255);
-    return CHSV(h, 255, 100);
+    return CHSV(h, 255, 50);
 }
 
 unsigned int LedManager::idleWave(byte value)

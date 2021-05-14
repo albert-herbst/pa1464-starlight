@@ -2,7 +2,7 @@
 
 #include "Definitions.h"
 
-#define NUM_CODES 2 // Final should be 15
+#define NUM_CODES 3 // Final should be 15
 
 
 

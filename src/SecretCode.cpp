@@ -11,20 +11,22 @@ SecretCode::SecretCode()
     }
     //Code 1
     //Required CODE
-    codes[0].inputs.data[0] = true;
-    codes[0].inputs.data[4] = true;
+    codes[0].inputs.data[3] = true;
+    codes[0].inputs.data[2] = true;
     //Gives OUTPUT
-    codes[0].outputs.data[2] = true;
+    codes[0].outputs.data[0] = true;
 
-    //Code 2
+    //Code 1
     //Required CODE
-    codes[1].inputs.data[0] = true;
-    codes[1].inputs.data[1] = true;
-    codes[1].inputs.data[2] = true;
     codes[1].inputs.data[3] = true;
-    codes[1].inputs.data[4] = true;
+    codes[1].inputs.data[1] = true;
     //Gives OUTPUT
+    codes[1].outputs.data[0] = true;
+    codes[1].outputs.data[2] = true;
     codes[1].outputs.data[1] = true;
+
+    
+
 }
 
 bool SecretCode::checkCode(IOArray* input)
